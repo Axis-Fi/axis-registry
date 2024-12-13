@@ -162,48 +162,6 @@ contract AxisMetadataRegistry is Ownable {
 
     // ========== ADMIN ========== //
 
-    function forceRegisterCurator(address curator_, uint256 xId_, string calldata ipfsCID_) external onlyOwner {
-        // Validate the xId is not zero
-        if (xId_ == 0) revert InvalidParam("xId");
-
-        // Validate the curator address is not already assigned an xId
-        if (curatorId[curator_] != 0) revert AlreadyAssigned();
-
-        // Validate the ipfsCID string is not empty
-        if (bytes(ipfsCID_).length == 0) revert InvalidParam("ipfsCID");
-
-        // Store the curator's xId
-        curatorId[curator_] = xId_;
-
-        // Store the metadata
-        curatorMetadata[xId_] = ipfsCID_;
-
-        // Emit event
-        emit CuratorRegistered(curator_, xId_, ipfsCID_);
-    }
-
-    function forceAddCuratorAddress(uint256 xId_, address curator_) external onlyOwner {
-        // Validate the xId is not zero
-        if (xId_ == 0) revert InvalidParam("xId");
-
-        // Validate the curator address is not already assigned an xId
-        if (curatorId[curator_] != 0) revert AlreadyAssigned();
-
-        // Store the curator's xId
-        curatorId[curator_] = xId_;
-    }
-
-    function forceRemoveCuratorAddress(uint256 xId_, address curator_) external onlyOwner {
-        // Validate the xId is not zero
-        if (xId_ == 0) revert InvalidParam("xId");
-
-        // Validate the curator address is assigned to the xId
-        if (curatorId[curator_] != xId_) revert InvalidParam("curator");
-
-        // Remove the curator's xId
-        delete curatorId[curator_];
-    }
-
     function updateServiceSigner(address serviceSigner_) external onlyOwner {
         serviceSigner = serviceSigner_;
     }
