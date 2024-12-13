@@ -64,8 +64,6 @@ contract AxisMetadataRegistry is Ownable {
 
     // ========== INIT ========== //
 
-    // TODO is it necessary to store ipfsCID onchain and emit an event? Can we just emit that part in an event?
-
     function registerCurator(CuratorRegistration calldata payload_, bytes calldata signature_) external {
         // Validate the sender is the curator listed in the payload
         if (msg.sender != payload_.curator) revert NotAuthorized();
@@ -208,6 +206,14 @@ contract AxisMetadataRegistry is Ownable {
 
     function updateServiceSigner(address serviceSigner_) external onlyOwner {
         serviceSigner = serviceSigner_;
+    }
+
+    function addAuctionHouse(address auctionHouse_) external onlyOwner {
+        isAuctionHouse[auctionHouse_] = true;
+    }
+
+    function removeAuctionHouse(address auctionHouse_) external onlyOwner {
+        delete isAuctionHouse[auctionHouse_];
     }
 
     // ========== SIGNATURE VALIDATION ========== //
