@@ -5,9 +5,7 @@ import {console2 as console} from "@forge-std/console2.sol";
 import {AxisMetadataRegistry} from "../src/MetadataRegistry.sol";
 
 contract Deploy is Script {
-
     function deploy() public {
-
         // Set constructor parameters
         address serviceSigner = msg.sender;
         address[] memory auctionHouses = new address[](1);
@@ -23,12 +21,8 @@ contract Deploy is Script {
 
         // Deploy the metadata registry
         vm.broadcast();
-        AxisMetadataRegistry metadataRegistry = new AxisMetadataRegistry(
-            serviceSigner,
-            auctionHouses
-        );
+        AxisMetadataRegistry metadataRegistry = new AxisMetadataRegistry(serviceSigner, auctionHouses);
 
         console.log("AxisMetadataRegistry deployed at:", address(metadataRegistry));
     }
-
 }
