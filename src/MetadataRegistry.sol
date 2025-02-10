@@ -5,34 +5,9 @@ import {Ownable} from "@openzeppelin/access/Ownable.sol";
 import {SignatureChecker} from "@openzeppelin/utils/cryptography/SignatureChecker.sol";
 
 import {IAuctionHouse} from "@axis-core/interfaces/IAuctionHouse.sol";
+import {IMetadataRegistry} from "./interfaces/IMetadataRegistry.sol";
 
-contract AxisMetadataRegistry is Ownable {
-    // ========== ERRORS ========== //
-
-    error AlreadyAssigned();
-    error InvalidParam(string param);
-    error InvalidSignature();
-    error NotAuthorized();
-
-    // ========== EVENTS ========== //
-
-    event AuctionRegistered(address auctionHouse, uint96 lotId, string ipfsCID);
-    event CuratorRegistered(address curator, uint256 xId, string ipfsCID);
-    event CuratorUpdated(uint256 xId, string ipfsCID);
-
-    // ========== DATA STRUCTURES ========== //
-
-    struct CuratorRegistration {
-        address curator;
-        uint256 xId;
-        string ipfsCID;
-    }
-
-    struct AuctionRegistration {
-        address auctionHouse;
-        uint96 lotId;
-        string ipfsCID;
-    }
+contract AxisMetadataRegistry is Ownable, IMetadataRegistry {
 
     // ========== STATE VARIABLES ========== //
 
