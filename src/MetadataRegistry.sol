@@ -8,7 +8,6 @@ import {IAuctionHouse} from "@axis-core/interfaces/IAuctionHouse.sol";
 import {IMetadataRegistry} from "./interfaces/IMetadataRegistry.sol";
 
 contract AxisMetadataRegistry is Ownable, IMetadataRegistry {
-
     // ========== STATE VARIABLES ========== //
 
     // Typed Data Variables
